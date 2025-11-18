@@ -35,7 +35,7 @@ public class Robot extends OpMode {
         strafe = gamepad1.left_stick_x;
         rot = gamepad1.right_stick_x;
 
-        drive.fieldRelativeDrive(forward,strafe,rot);
+        drive.drive(forward,strafe,rot);
 
     }
 
