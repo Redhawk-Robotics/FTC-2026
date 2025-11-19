@@ -23,6 +23,7 @@ public class Robot extends OpMode {
     private TelemetryManager telemetryM;
 
     double forward, strafe, rot;
+    String mode;
 
     @Override
     public void init() {
@@ -41,10 +42,16 @@ public class Robot extends OpMode {
         strafe = gamepad1.left_stick_x;
         rot = gamepad1.right_stick_x;
 
-        drive.drive(forward,strafe,rot);
+        if(gamepad1.a) {
+            drive.fieldRelativeDrive(forward,strafe,rot);
+            mode = "Field Relative";
+        }
 
+        if(gamepad1.b) {
+            drive.drive(forward,strafe,rot);
+            mode = "Robot Oriented";
+        }
     }
-
 }
 
 // Test commit #2
