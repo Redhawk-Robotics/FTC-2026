@@ -45,6 +45,6 @@ public class Constants {
             .leftRearEncoderDirection(Encoder.FORWARD)
             .rightFrontEncoderDirection(Encoder.FORWARD)
             .rightRearEncoderDirection(Encoder.FORWARD)
-            .robotWidth(PLACEHOLDER)
-            .robotLength(PLACEHOLDER);
+            .robotWidth(17.785)
+            .robotLength(17.323);
 }
