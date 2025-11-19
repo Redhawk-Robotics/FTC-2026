@@ -15,13 +15,13 @@ public class MecanumDrive {
 
     public void init(HardwareMap hwMap) {
 
-        frontLeftMotor = hwMap.get(DcMotor.class, "FrontLeft");
-        backLeftMotor = hwMap.get(DcMotor.class, "BackLeft");
-        frontRightMotor = hwMap.get(DcMotor.class, "FrontRight");
-        backRightMotor = hwMap.get(DcMotor.class, "BackRight");
+        frontLeftMotor = hwMap.get(DcMotor.class, "FrontLeft"); // 0
+        backLeftMotor = hwMap.get(DcMotor.class, "BackLeft"); // 1
+        frontRightMotor = hwMap.get(DcMotor.class, "FrontRight"); // 2
+        backRightMotor = hwMap.get(DcMotor.class, "BackRight"); // 3
 
-        frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
-        backRightMotor.setDirection(DcMotor.Direction.REVERSE);
+        frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
+        backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
 
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
