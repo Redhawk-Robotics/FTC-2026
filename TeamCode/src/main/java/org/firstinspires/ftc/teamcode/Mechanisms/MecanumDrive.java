@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.Mechanisms;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
@@ -23,8 +22,6 @@ public class MecanumDrive {
 
         frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
         backRightMotor.setDirection(DcMotor.Direction.REVERSE);
-        frontLeftMotor.setDirection(DcMotor.Direction.FORWARD);
-        backLeftMotor.setDirection(DcMotor.Direction.FORWARD);
 
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
