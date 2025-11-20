@@ -1,11 +1,11 @@
 package org.firstinspires.ftc.teamcode.Mechanisms;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.bosch.BNO055IMUNew;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
-
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class MecanumDrive {
@@ -74,9 +74,4 @@ public class MecanumDrive {
         this.drive(newForward, newStrafe, rot);
 
     }
-
-    public double getHeading(AngleUnit angleUnit) {
-        return imu.getRobotYawPitchRollAngles().getYaw(angleUnit);
-    }
-
 }

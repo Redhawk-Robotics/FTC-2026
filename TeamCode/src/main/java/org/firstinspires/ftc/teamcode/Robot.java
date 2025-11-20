@@ -20,20 +20,12 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class Robot extends OpMode {
 
     MecanumDrive drive = new MecanumDrive();
-    private TelemetryManager telemetryM;
-
     double forward, strafe, rot;
-    String mode;
 
     @Override
     public void init() {
 
         drive.init(hardwareMap);
-        telemetryM = PanelsTelemetry.INSTANCE.getTelemetry();
-        telemetryM.debug("Heading: ", drive.getHeading(AngleUnit.DEGREES));
-
-
-        telemetryM.update();
     }
 
     @Override
@@ -44,7 +36,7 @@ public class Robot extends OpMode {
         rot = -gamepad1.right_stick_x;
 
         drive.fieldRelativeDrive(forward,strafe,rot);
+
     }
 }
 
-// Test commit #2
