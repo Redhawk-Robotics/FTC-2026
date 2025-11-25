@@ -14,7 +14,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Constants {
 
     public static FollowerConstants followerConstants = new FollowerConstants()
-            .mass(5); // MUST BE IN KG
+            .mass(5.9); // MUST BE IN KG
 
     public static MecanumConstants driveConstants = new MecanumConstants()
             .maxPower(1)
