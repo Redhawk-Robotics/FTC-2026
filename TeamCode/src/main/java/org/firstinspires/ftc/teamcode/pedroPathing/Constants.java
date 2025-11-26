@@ -33,6 +33,7 @@ public class Constants {
         return new FollowerBuilder(followerConstants, hardwareMap)
                 .driveEncoderLocalizer(localizerConstants)
                 .pathConstraints(pathConstraints)
+                .mecanumDrivetrain(driveConstants)
                 .build();
     }
 
