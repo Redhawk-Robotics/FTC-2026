@@ -47,6 +47,6 @@ public class Constants {
             .rightFrontEncoderDirection(Encoder.REVERSE)
             .rightRearEncoderDirection(Encoder.REVERSE)
             .robotWidth(17.785)
-            .robotLength(17.323);
-            //.forwardTicksToInches(multiplier);
+            .robotLength(17.323)
+            .forwardTicksToInches(-0.0041770665874543735);
 }
