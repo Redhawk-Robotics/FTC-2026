@@ -42,13 +42,14 @@ public class Constants {
             .rightRearMotorName("BackRight")
             .leftRearMotorName("BackLeft")
             .leftFrontMotorName("FrontLeft")
-            .leftFrontEncoderDirection(Encoder.FORWARD)
-            .leftRearEncoderDirection(Encoder.FORWARD)
-            .rightFrontEncoderDirection(Encoder.REVERSE)
-            .rightRearEncoderDirection(Encoder.REVERSE)
+            .leftFrontEncoderDirection(Encoder.REVERSE)
+            .leftRearEncoderDirection(Encoder.REVERSE)
+            .rightFrontEncoderDirection(Encoder.FORWARD)
+            .rightRearEncoderDirection(Encoder.FORWARD)
             .robotWidth(17)
             .robotLength(18)
-            .forwardTicksToInches(-0.007931245658681212)
-            .strafeTicksToInches(-0.487877915076372)
-            .turnTicksToInches(-0.014701104282869772);
+            .forwardTicksToInches(0.006025677098257761)
+            .strafeTicksToInches(0.006215428936246123)
+            .turnTicksToInches(0.014609146731633929);
+
 }
