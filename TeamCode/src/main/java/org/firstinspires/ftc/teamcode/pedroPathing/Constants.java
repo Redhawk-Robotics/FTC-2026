@@ -14,7 +14,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Constants {
 
     public static FollowerConstants followerConstants = new FollowerConstants()
-            .mass(5.9); // MUST BE IN KG
+            .mass(4.8); // MUST BE IN KG
 
     public static MecanumConstants driveConstants = new MecanumConstants()
             .maxPower(1)
@@ -46,7 +46,7 @@ public class Constants {
             .leftRearEncoderDirection(Encoder.FORWARD)
             .rightFrontEncoderDirection(Encoder.REVERSE)
             .rightRearEncoderDirection(Encoder.REVERSE)
-            .robotWidth(17.785)
-            .robotLength(17.323)
+            .robotWidth(17)
+            .robotLength(18)
             .forwardTicksToInches(-0.0041770665874543735);
 }
