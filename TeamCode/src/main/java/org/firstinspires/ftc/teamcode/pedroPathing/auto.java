@@ -1,56 +1,98 @@
 package org.firstinspires.ftc.teamcode.pedroPathing;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.bylazar.configurables.annotations.Configurable;
+import com.bylazar.telemetry.PanelsTelemetry;
+import com.bylazar.telemetry.TelemetryManager;
 import com.pedropathing.follower.Follower;
-import com.pedropathing.geometry.Pose;
-import com.pedropathing.paths.Path;
+import com.pedropathing.geometry.BezierCurve;
 import com.pedropathing.geometry.BezierLine;
+import com.pedropathing.geometry.Pose;
+import com.pedropathing.paths.PathChain;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
-@Autonomous(name = "Auto", group = "Pedro Pathing")
-public class auto extends LinearOpMode {
+@Autonomous(name = "Pedro Pathing Autonomous", group = "Autonomous")
+@Configurable // Panels
+public class auto extends OpMode {
+
+    private TelemetryManager panelsTelemetry; // Panels Telemetry instance
+    public Follower follower; // Pedro Pathing follower instance
+    private int pathState; // Current autonomous path state (state machine)
+    private Paths paths; // Paths defined in the Paths class
 
     @Override
-    public void runOpMode() {
-        // Initialize follower
-        Follower follower = Constants.createFollower(hardwareMap);
+    public void init() {
+        panelsTelemetry = PanelsTelemetry.INSTANCE.getTelemetry();
 
-        // Set starting pose (x, y, heading in radians)
-        Pose startPose = new Pose(0, 0, 0);  // Starting at origin
-        follower.setStartingPose(startPose);
+        follower = Constants.createFollower(hardwareMap);
+        follower.setStartingPose(new Pose(72, 8, Math.toRadians(90)));
 
-        // Wait for the start signal
-        waitForStart();
-        if (isStopRequested()) return;
+        paths = new Paths(follower); // Build paths
 
-        // Create a simple straight-line path forward 24 inches
-        Path path = new Path(new BezierLine(startPose, new Pose(24, 0, 0))); // 24 inches forward along the X-axis
-
-        // Start following the path
-        follower.followPath(path);
-
-        // Follow the path until complete
-        while (opModeIsActive() && follower.isBusy()) {
-            // Continuously update follower to adjust robot's movement
-            follower.update();
-
-            // Print telemetry data to monitor robot status
-            telemetry.addData("Robot X Position", follower.getPose().getX());
-            telemetry.addData("Robot Y Position", follower.getPose().getY());
-            telemetry.addData("Robot Heading", follower.getPose().getHeading());
-            telemetry.addData("Path Progress", follower.isBusy());
-            telemetry.update();
-        }
-
-        // Stop robot after path completion
-        stopRobot();
+        panelsTelemetry.debug("Status", "Initialized");
+        panelsTelemetry.update(telemetry);
     }
 
-    // This stops the robot when it's done following the path
-    private void stopRobot() {
-        // Set all motors to zero power (stop the robot)
-        Follower follower = Constants.createFollower(hardwareMap);
-        follower.startTeleopDrive(true);
-        follower.setTeleOpDrive(0, 0, 0, true);
+    @Override
+    public void loop() {
+        follower.update(); // Update Pedro Pathing
+        pathState = autonomousPathUpdate(); // Update autonomous state machine
+
+        // Log values to Panels and Driver Station
+        panelsTelemetry.debug("Path State", pathState);
+        panelsTelemetry.debug("X", follower.getPose().getX());
+        panelsTelemetry.debug("Y", follower.getPose().getY());
+        panelsTelemetry.debug("Heading", follower.getPose().getHeading());
+        panelsTelemetry.update(telemetry);
+    }
+
+    public static class Paths {
+
+        public PathChain Path1;
+        public PathChain Path2;
+        public PathChain Path3;
+        public PathChain Path4;
+
+        public Paths(Follower follower) {
+            Path1 = follower
+                    .pathBuilder()
+                    .addPath(
+                            new BezierLine(new Pose(72.482, 71.518), new Pose(96.044, 71.518))
+                    )
+                    .setTangentHeadingInterpolation()
+                    .build();
+
+            Path2 = follower
+                    .pathBuilder()
+                    .addPath(
+                            new BezierLine(new Pose(96.044, 71.518), new Pose(96.493, 24.842))
+                    )
+                    .setTangentHeadingInterpolation()
+                    .build();
+
+            Path3 = follower
+                    .pathBuilder()
+                    .addPath(
+                            new BezierLine(new Pose(96.493, 24.842), new Pose(72.707, 25.066))
+                    )
+                    .setTangentHeadingInterpolation()
+                    .build();
+
+            Path4 = follower
+                    .pathBuilder()
+                    .addPath(
+                            new BezierLine(new Pose(72.707, 25.066), new Pose(72.482, 71.293))
+                    )
+                    .setTangentHeadingInterpolation()
+                    .build();
+        }
+    }
+
+    public int autonomousPathUpdate() {
+        // Add your state machine Here
+        // Access paths with paths.pathName
+        // Refer to the Pedro Pathing Docs (Auto Example) for an example state machine
+        return pathState;
     }
 }
