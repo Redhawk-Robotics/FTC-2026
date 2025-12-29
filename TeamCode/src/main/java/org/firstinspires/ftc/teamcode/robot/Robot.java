@@ -8,8 +8,7 @@ import org.firstinspires.ftc.teamcode.subsystems.MecanumDrive;
 
 // adb connect 192.168.43.1:5555 (Connect to the Control Hub via ADB)
 // http://192.168.43.1:8001 FTC Panel
-@Configurable
-@TeleOp(name = "TeleOp", group = "Robot")
+
 public class Robot {
 
     public MecanumDrive drive;
@@ -20,4 +19,3 @@ public class Robot {
     }
 
 }
-
