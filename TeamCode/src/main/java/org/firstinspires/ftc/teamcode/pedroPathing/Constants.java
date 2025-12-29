@@ -11,7 +11,7 @@ import com.qualcomm.hardware.lynx.LynxUsbUtil;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class Constants {
+public class Constants { // Tuning is still incomplete, need to do automatic tuning
 
     public static FollowerConstants followerConstants = new FollowerConstants()
             .mass(4.8); // MUST BE IN KG
