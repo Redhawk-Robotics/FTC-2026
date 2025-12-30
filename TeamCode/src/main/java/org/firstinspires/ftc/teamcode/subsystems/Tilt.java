@@ -10,8 +10,8 @@ public class Tilt {
     private final int gearRatio = 125; // Total gear reduction (5^3)
     private final double outputRev = 0.5; // PLACEHOLDER
     private final double targetPos = motorTicksPerRev * gearRatio * outputRev;
+    private final int startPos = 0;
 
-    public boolean isTilted = false;
 
     public void init(HardwareMap hwMap) {
         tiltMotor = hwMap.get(DcMotor.class, "TiltMotor");
@@ -21,25 +21,28 @@ public class Tilt {
         tiltMotor.setTargetPosition((int) targetPos);
     }
 
-    public void tilt(boolean bind_pressed, boolean lbumper, boolean rbumper) {
-        if (!bind_pressed) {
-            isTilted = false;
-            return;
-        }
-        if (isTilted) {
-            tiltMotor.setPower(0.5);
-            tiltMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            isTilted = false;
-        }
-        else {
+    public void tilt(boolean reduceTilt, boolean increaseTilt, boolean tiltBind) {
+
+        if (tiltBind) {
             tiltMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            isTilted = true;
         }
-        if (lbumper) {
+
+        if (increaseTilt) {
+            tiltMotor.setTargetPosition((int) targetPos);
             tiltMotor.setPower(0.5);
-        } else if (rbumper) {
-            tiltMotor.setPower(-0.5);
+
+            if (tiltMotor.getCurrentPosition() >= targetPos) {
+                tiltMotor.setPower(0);
+            }
+        }
+
+        if (reduceTilt) {
+            tiltMotor.setTargetPosition(startPos);
+            tiltMotor.setPower(0.5);
+
+            if (tiltMotor.getCurrentPosition() <= startPos) {
+                tiltMotor.setPower(0);
+            }
         }
     }
-
 }

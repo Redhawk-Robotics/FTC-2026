@@ -14,7 +14,6 @@ public class TeleOpMain extends OpMode {
     @Override
     public void init() {
         robot = new Robot(hardwareMap);
-        telemetry.addData("Lever is tilted:", robot.tilt.isTilted);
     }
 
 
@@ -25,14 +24,13 @@ public class TeleOpMain extends OpMode {
         double forward = gamepad1.left_stick_y;
         double strafe = -gamepad1.left_stick_x;
         double rot = -gamepad1.right_stick_x;
-
         robot.drive.fieldRelativeDrive(forward,strafe,rot);
 
         // Tilt
         boolean tiltBind = gamepad1.b;
-        boolean lower = gamepad1.left_bumper;
-        boolean lift = gamepad1.right_bumper;
-        robot.tilt.tilt(tiltBind,lower,lift);
+        boolean reduceTilt = gamepad1.left_bumper;
+        boolean increaseTilt = gamepad1.right_bumper;
+        robot.tilt.tilt(reduceTilt,increaseTilt,tiltBind);
 
     }
 
