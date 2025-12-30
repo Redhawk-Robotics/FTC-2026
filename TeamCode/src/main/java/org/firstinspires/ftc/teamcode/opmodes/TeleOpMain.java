@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.robot.Robot;
+import org.firstinspires.ftc.teamcode.subsystems.Tilt;
 
 
 @TeleOp
@@ -13,6 +14,7 @@ public class TeleOpMain extends OpMode {
     @Override
     public void init() {
         robot = new Robot(hardwareMap);
+        telemetry.addData("Lever is tilted:", robot.tilt.isTilted);
     }
 
 
