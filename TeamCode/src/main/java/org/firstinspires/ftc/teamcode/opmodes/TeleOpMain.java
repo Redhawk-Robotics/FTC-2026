@@ -30,7 +30,9 @@ public class TeleOpMain extends OpMode {
 
         // Tilt
         boolean tiltBind = gamepad1.b;
-        robot.tilt.tilt(tiltBind);
+        boolean lower = gamepad1.left_bumper;
+        boolean lift = gamepad1.right_bumper;
+        robot.tilt.tilt(tiltBind,lower,lift);
 
     }
 

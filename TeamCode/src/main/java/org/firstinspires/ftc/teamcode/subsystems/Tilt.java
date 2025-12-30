@@ -21,7 +21,7 @@ public class Tilt {
         tiltMotor.setTargetPosition((int) targetPos);
     }
 
-    public void tilt(boolean bind_pressed) {
+    public void tilt(boolean bind_pressed, boolean lbumper, boolean rbumper) {
         if (!bind_pressed) {
             isTilted = false;
             return;
@@ -34,6 +34,11 @@ public class Tilt {
         else {
             tiltMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             isTilted = true;
+        }
+        if (lbumper) {
+            tiltMotor.setPower(0.5);
+        } else if (rbumper) {
+            tiltMotor.setPower(-0.5);
         }
     }
 
