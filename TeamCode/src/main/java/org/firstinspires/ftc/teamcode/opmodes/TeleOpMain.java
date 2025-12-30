@@ -23,9 +23,7 @@ public class TeleOpMain extends OpMode {
         double rot = -gamepad1.right_stick_x;
 
         robot.drive.fieldRelativeDrive(forward,strafe,rot);
-
-
-
+        
     }
 
 }
