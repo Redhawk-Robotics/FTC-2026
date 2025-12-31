@@ -1,16 +1,17 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
+import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+@Configurable
 public class Tilt {
 
     private DcMotor tiltMotor;
     private final int motorTicksPerRev = 28; // Ticks per motor revolution
     private final int gearRatio = 125; // Total gear reduction (5^3)
-    private final double outputRev = 0.5; // PLACEHOLDER
+    private final double outputRev = 0.4;
     private final double targetPos = motorTicksPerRev * gearRatio * outputRev;
-    private final int startPos = 0;
 
 
     public void init(HardwareMap hwMap) {
@@ -28,21 +29,12 @@ public class Tilt {
         }
 
         if (increaseTilt) {
-            tiltMotor.setTargetPosition((int) targetPos);
             tiltMotor.setPower(0.5);
-
-            if (tiltMotor.getCurrentPosition() >= targetPos) {
-                tiltMotor.setPower(0);
-            }
         }
 
         if (reduceTilt) {
-            tiltMotor.setTargetPosition(startPos);
-            tiltMotor.setPower(0.5);
-
-            if (tiltMotor.getCurrentPosition() <= startPos) {
-                tiltMotor.setPower(0);
-            }
+            tiltMotor.setPower(-0.5);
         }
     }
 }
+
