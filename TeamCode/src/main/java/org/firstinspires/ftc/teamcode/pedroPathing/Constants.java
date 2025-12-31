@@ -51,5 +51,4 @@ public class Constants { // Tuning is still incomplete, need to do automatic tun
             .forwardTicksToInches(0.006025677098257761)
             .strafeTicksToInches(0.006215428936246123)
             .turnTicksToInches(0.014609146731633929);
-
 }

@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
+import com.bylazar.telemetry.PanelsTelemetry;
+import com.bylazar.telemetry.TelemetryManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.robot.Robot;
@@ -30,7 +32,9 @@ public class TeleOpMain extends OpMode {
         boolean reduceTilt = gamepad1.left_bumper;
         boolean increaseTilt = gamepad1.right_bumper;
         robot.tilt.tilt(reduceTilt,increaseTilt,tiltBind);
-
+        telemetry.addData("Reduce Tilt: ", reduceTilt);
+        telemetry.addData("Increase Tilt: ", increaseTilt);
+        telemetry.addData("Tilt bind pressed: ", tiltBind);
     }
 
 }

@@ -10,7 +10,7 @@ public class Tilt {
     private DcMotor tiltMotor;
     private final int motorTicksPerRev = 28; // Ticks per motor revolution
     private final int gearRatio = 125; // Total gear reduction (5^3)
-    private final double outputRev = 0.4;
+    public static double outputRev = 0.2;
     private final double targetPos = motorTicksPerRev * gearRatio * outputRev;
 
 
@@ -23,17 +23,24 @@ public class Tilt {
     }
 
     public void tilt(boolean reduceTilt, boolean increaseTilt, boolean tiltBind) {
+        int startPos = 0;
 
         if (tiltBind) {
             tiltMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        } else if (tiltBind && tiltMotor.isBusy()) {
+            tiltMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         }
 
-        if (increaseTilt) {
-            tiltMotor.setPower(0.5);
+        if (increaseTilt && tiltMotor.getCurrentPosition() < targetPos) {
+            tiltMotor.setPower(1);
+        } else {
+            tiltMotor.setPower(0);
         }
 
-        if (reduceTilt) {
-            tiltMotor.setPower(-0.5);
+        if (reduceTilt && tiltMotor.getCurrentPosition() > startPos) {
+            tiltMotor.setPower(-1);
+        } else {
+            tiltMotor.setPower(0);
         }
     }
 }
