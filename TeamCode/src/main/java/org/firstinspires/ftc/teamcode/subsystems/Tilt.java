@@ -27,7 +27,9 @@ public class Tilt {
 
         if (tiltBind) {
             tiltMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        } else if (tiltBind && tiltMotor.isBusy()) {
+        }
+
+        if(!tiltBind && tiltMotor.isBusy()) {
             tiltMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         }
 
