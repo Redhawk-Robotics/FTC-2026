@@ -34,7 +34,6 @@ public class TeleOpMain extends OpMode {
         robot.tilt.tilt(reduceTilt,increaseTilt,tiltBind);
         telemetry.addData("Reduce Tilt: ", reduceTilt);
         telemetry.addData("Increase Tilt: ", increaseTilt);
-        telemetry.addData("Tilt bind pressed: ", tiltBind);
     }
 
 }
