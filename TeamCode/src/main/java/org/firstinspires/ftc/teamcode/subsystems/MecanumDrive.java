@@ -58,7 +58,11 @@ public class MecanumDrive {
 
     }
 
-    public void fieldRelativeDrive(double forward, double strafe, double rot) {
+    public void fieldRelativeDrive(double forward, double strafe, double rot, boolean reinitIMU) {
+
+        if (reinitIMU) {
+            imu.resetYaw();
+        }
 
         double theta = Math.atan2(forward, strafe);
         double r = Math.hypot(strafe, forward);

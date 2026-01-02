@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.robot.Robot;
 
-@Autonomous
+@Autonomous(name = "fwd auto", group = "auto")
 public class AutoMain extends LinearOpMode {
     private Robot robot;
 
