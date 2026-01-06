@@ -28,10 +28,9 @@ public class TeleOpMain extends OpMode {
         robot.drive.fieldRelativeDrive(forward,strafe,rot,resetHeading);
 
         // Tilt
-        boolean tiltBind = gamepad2.b;
         boolean reduceTilt = gamepad2.left_bumper;
         boolean increaseTilt = gamepad2.right_bumper;
-        robot.tilt.tilt(reduceTilt,increaseTilt,tiltBind);
+        robot.tilt.tilt(reduceTilt,increaseTilt);
         telemetry.addData("Reduce Tilt: ", reduceTilt);
         telemetry.addData("Increase Tilt: ", increaseTilt);
     }

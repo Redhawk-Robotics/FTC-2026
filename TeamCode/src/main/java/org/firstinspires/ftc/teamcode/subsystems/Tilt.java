@@ -2,18 +2,17 @@ package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 @Configurable
 public class Tilt {
 
     private DcMotor tiltMotor;
-    private final int motorTicksPerRev = 28; // Ticks per motor revolution
-    private final int gearRatio = 125; // Total gear reduction (5^3)
-    public static double outputRev = 0.2;
-    private final double targetPos = motorTicksPerRev * gearRatio * outputRev;
-    private boolean tiltExtended = false;
-    private boolean lastTiltBind = false;
+    private static final int motorTicksPerRev = 28; // Ticks per motor revolution
+    private static final int gearRatio = 125; // Total gear reduction (5^3)
+    public static double outputRev = 0.3;
+    private static final double targetPos = motorTicksPerRev * gearRatio * outputRev;
 
 
     public void init(HardwareMap hwMap) {
@@ -23,36 +22,19 @@ public class Tilt {
         tiltMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
-    public void tilt(boolean reduceTilt, boolean increaseTilt, boolean tiltBind) {
-        int startPos = 0;
+    public void tilt(boolean reduceTilt, boolean increaseTilt) {
 
-        if (tiltBind && !lastTiltBind) {
-            tiltExtended = !tiltExtended;
-
-            tiltMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-            if (tiltExtended) {
-                tiltMotor.setTargetPosition((int) targetPos);
-                tiltMotor.setPower(0.5);
-            } else {
-                tiltMotor.setTargetPosition(startPos);
-                tiltMotor.setPower(-0.5);
-            }
-        }
-
-        lastTiltBind = tiltBind;
-
-        if (increaseTilt && tiltMotor.getCurrentPosition() < targetPos) {
-            tiltMotor.setPower(1);
+        // If both are true, do nothing (or handle this case based on your logic)
+        if (increaseTilt && reduceTilt) {
+            tiltMotor.setPower(0);  // No movement
+        } else if (increaseTilt) {
+            tiltMotor.setPower(1);  // Move up
+        } else if (reduceTilt) {
+            tiltMotor.setPower(-1); // Move down
         } else {
-            tiltMotor.setPower(0);
-        }
-
-        if (reduceTilt && tiltMotor.getCurrentPosition() > startPos) {
-            tiltMotor.setPower(-1);
-        } else {
-            tiltMotor.setPower(0);
+            tiltMotor.setPower(0);  // Stop movement
         }
     }
+
 }
 
